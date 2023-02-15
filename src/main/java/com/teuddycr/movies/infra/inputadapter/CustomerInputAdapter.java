@@ -18,7 +18,7 @@ public class CustomerInputAdapter {
     @Autowired
     CustomerInputPort customerInputPort;
 
-    @PostMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer create(@RequestParam String name, @RequestParam String country) {
         return customerInputPort.createCustomer(name, country);
     }
