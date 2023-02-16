@@ -2,8 +2,8 @@ package com.teuddycr.movies.infra.outputport;
 
 import java.util.List;
 
-//output port
-public interface EntityRepository {
+// This is the Data base output Port / mi cortafuego de mi base de datos
+public interface DatabaseOutputPort {
 
     public <T> T save(T reg);
 
