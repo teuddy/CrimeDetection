@@ -13,10 +13,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.teuddycr.movies.infra.outputport.EntityRepository;
+import com.teuddycr.movies.infra.outputport.DatabaseOutputPort;
 
 @Component
-public class PostgresOutputAdapter implements EntityRepository {
+public class PostgresOutputAdapter implements DatabaseOutputPort {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -56,6 +56,11 @@ public class PostgresOutputAdapter implements EntityRepository {
 
     @Override
     public <T> T getById(String id, Class<T> clazz) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
         List<T> list = jdbcTemplate.query("SELECT * FROM " + clazz.getSimpleName() + " WHERE id = ?",
                 new LombokRowMapper<T>(clazz),
                 id);
@@ -68,6 +73,11 @@ public class PostgresOutputAdapter implements EntityRepository {
 
     @Override
     public <T> List<T> getAll(Class<T> clazz) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
         return jdbcTemplate.query("SELECT * FROM " + clazz.getSimpleName(), new LombokRowMapper<T>(clazz));
     }
 

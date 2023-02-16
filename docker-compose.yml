@@ -12,3 +12,15 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+  cache:
+    container_name: redis-caching
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local
