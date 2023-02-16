@@ -68,6 +68,11 @@ public class PostgresOutputAdapter implements EntityRepository {
 
     @Override
     public <T> List<T> getAll(Class<T> clazz) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
         return jdbcTemplate.query("SELECT * FROM " + clazz.getSimpleName(), new LombokRowMapper<T>(clazz));
     }
 
